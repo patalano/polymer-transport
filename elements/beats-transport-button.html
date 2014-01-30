@@ -1,0 +1,17 @@
+<!--
+	Base transport button class.
+
+	Published properties:
+		- buttonText: String that is written into the button
+-->
+
+<link rel="import" href="../bower_components/polymer/polymer.html" />
+
+<polymer-element name="beats-transport-button" attributes="buttonText">
+	<template>{{buttonText}}</template>
+	<script>
+		Polymer('beats-transport-button', {
+			buttonText: ""
+		});
+	</script>
+</polymer-element>

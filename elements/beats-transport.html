@@ -1,0 +1,106 @@
+<link rel="import" href="../bower_components/polymer/polymer.html" />
+<link rel="import" href="../bower_components/polymer-flex-layout/polymer-flex-layout.html">
+<link rel="import" href="./beats-transport-button.html" />
+<link rel="import" href="./beats-transport-album-art.html" />
+<link rel="import" href="./beats-transport-play-button.html" />
+<link rel="import" href="./beats-transport-prev-button.html" />
+<link rel="import" href="./beats-transport-next-button.html" />
+<link rel="import" href="./beats-transport-info.html" />
+
+<polymer-element name="beats-transport">
+
+	<template>
+
+		<!-- Make this a flex box. -->
+		<polymer-flex-layout></polymer-flex-layout>
+
+		<!-- Album art. It's _art_ property is bound to _this.currentArt_. -->
+		<beats-transport-album-art art="{{currentArt}}"></beats-transport-album-art>
+
+		<!-- Play button. Handle _play_ and _pause_ buttons that it emits. -->
+		<beats-transport-play-button on-play="{{handlePlay}}" on-pause="{{handlePause}}"></beats-transport-play-button>
+
+		<!-- Previous and Next buttons. Handle click events to go previous/next. -->
+		<beats-transport-prev-button on-click="{{handlePrev}}"></beats-transport-prev-button>
+		<beats-transport-next-button on-click="{{handleNext}}"></beats-transport-next-button>
+
+		<!-- Info container bound to _this.currentTitle_ and _this.currentArtist_. This component will flex with the transport. -->
+		<beats-transport-info currentTitle="{{currentTitle}}" currentArtist="{{currentArtist}}" flex></beats-transport-info>
+
+		<!-- Other controls to be added in the future. -->
+		<beats-transport-button></beats-transport-button>
+		<beats-transport-button></beats-transport-button>
+		<beats-transport-button></beats-transport-button>
+
+	</template>
+
+	<script>
+		Polymer('beats-transport', {
+			trackIndex: 0,
+			currentArt: "",
+			currentTitle: "",
+			currentArtist: "",
+
+			ready: function() {
+				this.trackList = [
+					{
+						title: "Track One",
+						artist: "Artist One",
+						art: "http://upload.wikimedia.org/wikipedia/en/archive/f/f7/20120813205342!TheHeartofSaturdayNight.jpg"
+					},
+					{
+						title: "Track Two",
+						artist: "Artist Two",
+						art: "http://rustnbones.files.wordpress.com/2009/10/tom-waits-used-songs-1973-1980-album-cover.jpg"
+					},
+					{
+						title: "Track Three",
+						artist: "Artist Three",
+						art: "http://rokpool.com/files/artist/Tom-Waits-Rain-Dogs-98487.jpg"
+					},
+					{
+						title: "Track Four",
+						artist: "Artist Four",
+						art: "http://andyperkins.files.wordpress.com/2008/02/orphans_album_art_hi.jpg"
+					},
+					{
+						title: "Track Five",
+						artist: "Artist Five",
+						art: "http://upload.wikimedia.org/wikipedia/en/archive/c/cb/20120726184515!Tom_Waits_-_Closing_Time.jpg"
+					},
+					{
+						title: "Track Six",
+						artist: "Artist Six",
+						art: "http://ecx.images-amazon.com/images/I/41lDcLjustL._SL500_.jpg"
+					}
+				];
+
+				this.trackIndexChanged();
+			},
+			handlePlay: function() {
+				console.log("handle play");
+			},
+			handlePause: function() {
+				console.log("handle pause");
+			},
+			handlePrev: function() {
+				this.trackIndex = this.clampTrackIndex(this.trackIndex-1);
+			},
+			handleNext: function() {
+				this.trackIndex = this.clampTrackIndex(this.trackIndex+1);
+			},
+			clampTrackIndex: function(inIndex) {
+				return Math.max(0, Math.min(this.trackList.length - 1, inIndex));
+			},
+			trackIndexChanged: function() {
+				var track = this.getTrackAtCurrentIndex();
+				this.currentArtist = track.artist;
+				this.currentTitle  = track.title;
+				this.currentArt    = track.art;
+			},
+			getTrackAtCurrentIndex: function() {
+				return this.trackList[this.trackIndex];
+			}
+		});
+    </script>
+</polymer-element>

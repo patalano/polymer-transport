@@ -1,0 +1,26 @@
+{
+  "name": "polymerTest",
+  "version": "0.0.0",
+  "authors": [
+    "Chris Patalano <cpatalano@beatsmusic.com>"
+  ],
+  "description": "my polymer test",
+  "main": "index.html",
+  "license": "MIT",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer-elements": "Polymer/polymer-elements#~0.1.4",
+    "polymer-ui-elements": "Polymer/polymer-ui-elements#~0.1.4",
+    "polymer": "Polymer/polymer#~0.1.4",
+    "platform": "Polymer/platform#~0.1.4",
+    "polymer-ajax": "Polymer/polymer-ajax#~0.1.4",
+    "polymer-flex-layout": "Polymer/polymer-flex-layout#~0.1.4"
+  }
+}

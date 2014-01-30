@@ -1,0 +1,18 @@
+<link rel="import" href="../bower_components/polymer/polymer.html" />
+
+<polymer-element name="beats-transport-album-art" attributes="art" noscript>
+	<template>
+
+		<style>
+		:host > div {
+			display: block;
+			width: 100%;
+			height: 100%;
+			background-size: cover;
+		}
+		</style>
+
+		<div style="background-image: url({{art}});"></div>
+
+	</template>
+</polymer-element>

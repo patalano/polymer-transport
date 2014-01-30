@@ -1,0 +1,24 @@
+<link rel="import" href="../bower_components/polymer/polymer.html" />
+
+<polymer-element name="beats-transport-info" attributes="currentTitle currentArtist">
+	<template>
+
+		<style>
+			:host > * {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+		</style>
+
+		<h3>{{currentTitle}}</h3>
+		<p>{{currentArtist}}</p>
+	</template>
+
+	<script>
+		Polymer("beats-transport-info", {
+			currentTitle: "Default Title",
+			currentArtist: "Default Artist"
+		});
+	</script>
+</polymer-element>

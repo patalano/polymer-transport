@@ -1,0 +1,46 @@
+<link rel="import" href="../bower_components/polymer/polymer.html" />
+
+<polymer-element name="beats-transport-play-button" attributes="paused" on-click="togglePaused">
+	<template>{{buttonText}}</template>
+
+	<script>
+		Polymer('beats-transport-play-button', {
+			//*
+			//* Default values for published properties
+			//*
+			paused: false,
+
+			//*
+			//* Default values for private properties
+			//*
+			buttonText: ">",
+
+			//* On ready, trigger _this.pausedChanged_ to set correct state
+			ready: function() {
+				this.pausedChanged();
+			},
+			//* When clicked, toggle paused state
+			togglePaused: function() {
+				this.paused = !this.paused;
+			},
+			//* When _this.paused_ changes, respond accordingly
+			pausedChanged: function() {
+				if (this.paused) {
+					this.pause();
+				} else {
+					this.play();
+				}
+			},
+			//* To play, set button to show paused text and fire _play_ event.
+			play: function() {
+				this.buttonText = "=";
+				this.fire("play");
+			},
+			//* To pause, set button to show play text and fire _pause_ event.
+			pause: function() {
+				this.buttonText = ">";
+				this.fire("pause");
+			}
+		});
+    </script>
+</polymer-element>
